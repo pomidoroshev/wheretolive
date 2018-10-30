@@ -18,7 +18,7 @@ function getCircleCoords(angle, distance, center) {
 }
 
 function getDuration(fromCoords, toCoords, routingMode = 'masstransit') {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         var route = new ymaps.multiRouter.MultiRoute({
             referencePoints: [fromCoords, toCoords],
             params: {
@@ -32,7 +32,7 @@ function getDuration(fromCoords, toCoords, routingMode = 'masstransit') {
                 resolve(null);
                 return;
             }
-            duration = activeRoute.properties.get('duration').value;
+            let duration = activeRoute.properties.get('duration').value;
             resolve(duration);
         });
     });
@@ -84,26 +84,27 @@ async function init() {
         center: CENTER,
         zoom: 11
     });
-    myMap.geoObjects.add(new ymaps.Placemark(CENTER, {}, {
-        preset: 'islands#redCircleDotIcon'
-    }));
-
-    let R = mean(R_MIN, R_MAX), coords
+    let R = mean(R_MIN, R_MAX)
+    let coords
     let polyline = new ymaps.Polyline([], {}, {
         strokeColor: "#00000088",
         strokeWidth: 3
     })
+
+    myMap.geoObjects.add(new ymaps.Placemark(CENTER, {}, {
+        preset: 'islands#redCircleDotIcon'
+    }));
 
     myMap.geoObjects.add(polyline)
     for (let i = 0; i < 36; i++) {
         polyline.geometry.insert(polyline.geometry.getLength(), CENTER)
     }
     for (let angle = 0, i = 0; angle <= 360; angle += 10, i++) {
-        setTimeout(async function() {
+        setTimeout(async function () {
             ({coords, R} = await getAppropriatePoint(CENTER, angle, R, R_MIN, R_MAX, myMap));
             polyline.geometry.set(i, coords)
         }, 0)
     }
 }
 
-ymaps.ready(init);
+window.ymaps.ready(init)

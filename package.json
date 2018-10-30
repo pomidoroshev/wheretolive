@@ -1,0 +1,25 @@
+{
+  "name": "wheretolive",
+  "version": "1.0.0",
+  "main": "script.js",
+  "repository": "git@github.com:pomidoroshev/wheretolive.git",
+  "author": "Dmitry Doroshev <r.schweppes@ya.ru>",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.1.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "babelify": "^10.0.0",
+    "browserify": "^16.2.3",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^8.0.0-beta.2",
+    "gulp-babel-minify": "^0.5.0",
+    "gulp-cache-bust": "^1.4.0",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  }
+}
