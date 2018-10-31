@@ -123,7 +123,7 @@ function init() {
         _onGetChildElement: function (parentDomContainer) {
             let html = '<div class="duration">' +
                          '<label for="duration">Время в пути (мин):</label>' +
-                         '<input type="number" value="' + DEFAULT_DURATION + '" id="duration" pattern="\d*">' +
+                         '<input type="number" value="' + DEFAULT_DURATION + '" id="duration" min="0" max="90" pattern="\d*">' +
                          '<button class="doit">Нарисовать</button>' +
                          '<div class="hint">Сначала нажмите на карту, чтобы поставить точку</div>' +
                        '</div>';
