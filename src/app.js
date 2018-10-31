@@ -2,6 +2,7 @@ const CENTER = [55.753855, 37.615931];
 const RADIUS = 0.01
 const R_MIN = 0, R_MAX = 10
 const DEFAULT_DURATION = 30
+const MAX_DURATION = 99;
 
 let coords;
 
@@ -41,7 +42,11 @@ function getDuration(fromCoords, toCoords, routingMode = 'masstransit') {
 }
 
 function checkDuration(duration, gap = 60) {
-    let maxDuration = parseInt($('#duration').val()) * 60;
+    let durationMinutes = parseInt($('#duration').val())
+    if (durationMinutes > MAX_DURATION) {
+        durationMinutes = MAX_DURATION;
+    }
+    let maxDuration = durationMinutes * 60;
     let delta = maxDuration - duration
     let absDelta = Math.abs(delta)
 
@@ -123,11 +128,16 @@ function init() {
         _onGetChildElement: function (parentDomContainer) {
             let html = '<div class="duration">' +
                          '<label for="duration">Время в пути (мин):</label>' +
-                         '<input type="number" value="' + DEFAULT_DURATION + '" id="duration" min="0" max="90" pattern="\d*">' +
+                         '<input type="number" value="' + DEFAULT_DURATION + '" id="duration">' +
                          '<button class="doit">Нарисовать</button>' +
                          '<div class="hint">Сначала нажмите на карту, чтобы поставить точку</div>' +
                        '</div>';
             this._$content = $(html).appendTo(parentDomContainer);
+            $('#duration').jStepper({
+                minValue: 1,
+                maxValue: MAX_DURATION,
+                defaultValue: 30
+            })
             $('.doit').on('click', function() {
                 drawArea(coords, myMap);
             });
