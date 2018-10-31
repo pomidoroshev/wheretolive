@@ -24,9 +24,9 @@ gulp.task("default", function () {
         .pipe(minify())
         .pipe(gulp.dest("dist"));
 
-    return gulp.src('./index.html')
+    return gulp.src('./src/index.html')
         .pipe(cachebust({
             type: 'timestamp'
         }))
-        .pipe(gulp.dest('.'));
+        .pipe(gulp.dest('./dist'));
 });
